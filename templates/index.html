@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(40, 38, 38);
+    color: #333; 
+    line-height: 1.6;
+}
+
+header {
+    background-color: #020347; 
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 0px; 
+    width: 100%;
+}
+
+header h1 {
+    font-size: 3rem; 
+    margin-bottom: -10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+section {
+    padding: 40px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+}
+
+.artists-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center; 
+}
+
+.artist-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s; 
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd; 
+}
+
+.artist-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.artist-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #1abc9c; 
+}
+
+.artist-card h3 {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    color: #2980b9; 
+}
+
+.artist-card p {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.artist-card button {
+    background-color: #2980b9; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.artist-card button:hover {
+    background-color:#1b5881 ;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .artist-card {
+        padding: 15px;
+    }
+
+    .artist-card img {
+        height: 150px;
+    }
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Trackers</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/icone.ico">
+</head>
+<body>
+    <header>
+        <h1>Groupie Trackers</h1>
+        <p>Explore Bands and Their Tours</p>
+    </header>
+
+    <section>
+        <h2>Artists</h2>
+        <div class="artists-container">
+            {{range .}}
+            <div class="artist-card">
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <h3>{{.Name}}</h3>
+                <p><strong>Active Since:</strong> {{.Creationdate}}</p>
+                <a href="/artist/{{.Id}}">
+                <button>Details</button>
+                </a>
+            </div>
+            {{end}}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(40, 38, 38);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        div:first-of-type {
+            text-align: center;
+            margin-bottom: 40px;
+            flex-basis: 100%;
+        }
+
+        div:first-of-type img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                        0 0 10px #03ffcd,  
+                        0 0 30px #03ffcd, 
+                        0 0 50px #03ffcd;
+            margin-bottom: 20px;
+        }
+
+        div:first-of-type h3 {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .artist-detail {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            min-width: 500px;
+            margin-right: 20px;
+            width: auto;
+            align-self: flex-start; 
+        }
+
+        .artist-detail h3 {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .artist-detail p {
+            font-size: 1.1rem;
+            color: #272a2b;
+            margin-bottom: 10px;
+        }
+
+        .artist-detail p:first-of-type {
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .artist-detail p:last-of-type {
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .concert-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    width: auto; 
+    align-self: flex-start; 
+}
+
+        .concert-box h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .concert-box p {
+            font-size: 1rem;
+            color: #272a2b;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            div:first-of-type img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .artist-detail {
+                padding: 15px;
+                margin-right: 0;
+            }
+
+            .artist-detail h3 {
+                font-size: 1.3rem;
+            }
+
+            .artist-detail p {
+                font-size: 1rem;
+            }
+
+            .concert-box {
+                max-width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Artist.Name}}</title>
+</head>
+<body>
+    <div>
+        <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+        <h3>{{.Artist.Name}}</h3>
+    </div>
+    <div class="artist-detail">
+        <p>Creation Dates : {{.Artist.Creationdate}}</p>
+        <h3>Members: </h3>
+        {{range .Artist.Members}}
+        <p>{{.}}</p>
+        {{end}}
+        <p>First Album: {{.Artist.Firstalbum}}</p>
+    </div>
+    <div class="concert-box">
+        <h3>Concert Locations and Dates</h3>
+        {{range $index, $val := .Relation.DateLocation}}
+        <p>Location: {{$index}}</p>
+        <p>Dates: </p>
+        {{range $date := $val }}
+        <p>{{$date}}</p>
+    {{end}}
+    {{end}}
+</body>
+</html>
